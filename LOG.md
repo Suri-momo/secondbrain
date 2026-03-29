@@ -37,6 +37,34 @@ A chronological record of completed milestones, features, and tasks.
 **Next Steps:**
 - Start Milestone 1.1: Project Structure & Tooling Setup
 
+### ✅ Twitter Bookmarks Feature Added
+**Time:** 2024-03-29 15:30 UTC
+
+**Completed:**
+- Added F6 to PRD.md: Twitter Bookmarks Import feature
+- Added Milestone 3.4 to PLAN.md: Implementation plan
+- Updated DESIGN.md: Added 'twitter' file_type, new API endpoint
+- Added 4 new user stories (US-11 through US-14)
+
+**Feature Requirements:**
+- **Problem:** User saves ~100 tweets but never has time to review them and can't find them when needed
+- **Solution:** Import Twitter data export → AI-powered search → Add personal learning notes
+- **Import Method:** Semi-automated (monthly reminder + drag & drop)
+- **Organization:** Single conversation per import
+- **Thread Handling:** Full thread context included
+- **Timeline:** Phase 4 (Milestone 3.4)
+- **Cost:** FREE (uses Twitter data export, not API)
+
+**Decisions:**
+- Chose manual import over Twitter API ($0 vs $100/month)
+- Monthly reminder system to keep bookmarks updated
+- Merge strategy: Keep old bookmarks, add new ones only
+- Personal notes saved as chat messages (searchable)
+
+**Next Steps:**
+- Build core features first (Milestones 1-3)
+- Implement Twitter import in Phase 4
+
 ---
 
 ## Milestone Progress Tracker

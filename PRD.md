@@ -78,6 +78,31 @@ Users can add content to a conversation in three ways:
 - Refreshing the page or revisiting a conversation URL restores the full thread.
 - History persists across browser sessions (server-side, not localStorage).
 
+### F6 — Twitter Bookmarks Import (Knowledge Base)
+Users can import their saved Twitter bookmarks to create a searchable knowledge base:
+
+| Feature | Description |
+|---|---|
+| **Import Method** | Upload Twitter data export (`bookmarks.json`) |
+| **Content Imported** | Tweet text, author, URL, date, full thread context |
+| **Organization** | Single conversation: "Twitter Bookmarks (YYYY-MM-DD)" |
+| **Search** | Ask questions: "What have I saved about React?" |
+| **Personal Notes** | Add learning notes as chat messages |
+| **Monthly Sync** | Dashboard reminder to re-import (merge new bookmarks) |
+
+**User Flow:**
+1. User requests Twitter data export (Settings → Download your data)
+2. After 24h, Twitter emails `bookmarks.json`
+3. User drags & drops file into StudySync
+4. StudySync parses ~100 bookmarks, extracts threads
+5. Creates "Twitter Bookmarks" conversation
+6. User asks: "What have I saved about Next.js?"
+7. AI finds relevant tweets + summarizes
+8. User adds notes: "📝 Learned: App Router replaces pages..."
+9. Monthly reminder to re-import (new bookmarks merged)
+
+**Problem Solved:** Users save tweets but never have time to review them and can't find them when needed.
+
 ---
 
 ## 4. User Stories
@@ -94,6 +119,10 @@ Users can add content to a conversation in three ways:
 | US-08 | Student | Delete a conversation | I can clean up sessions I no longer need |
 | US-09 | Student | Rename a conversation | I can give it a meaningful title |
 | US-10 | Student | Refresh the page | I don't lose my conversation history |
+| US-11 | Student | Import my Twitter bookmarks | I can search tweets I saved months ago |
+| US-12 | Student | Ask about saved tweets | I can find relevant content without scrolling through 100 bookmarks |
+| US-13 | Student | Add learning notes to tweets | I can document what I learned from each topic |
+| US-14 | Student | Get monthly import reminders | I keep my knowledge base up-to-date effortlessly |
 
 ---
 
@@ -111,6 +140,7 @@ Users can add content to a conversation in three ways:
 | `/api/conversations/{id}/chat` | POST | Send a message, returns SSE streaming response |
 | `/api/conversations/{id}/upload` | POST | Upload a file (multipart/form-data) |
 | `/api/conversations/{id}/url` | POST | Ingest a URL |
+| `/api/conversations/{id}/twitter` | POST | Import Twitter bookmarks JSON |
 | `/api/search` | POST | Standalone Tavily web search |
 | `/api/health` | GET | Health check (used by CI) |
 
@@ -179,6 +209,9 @@ created_at       datetime
 - Real-time collaborative editing
 - Image or video file support
 - Streaming document upload progress (indeterminate only)
+- Twitter API auto-sync (requires $100/month subscription)
+- LinkedIn / Reddit bookmarks import (future platforms)
+- AI categorization of bookmarks by topic (future enhancement)
 
 ---
 

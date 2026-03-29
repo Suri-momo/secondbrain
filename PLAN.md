@@ -1719,7 +1719,192 @@ frontend/src/
 
 ---
 
-### Milestone 3.4 — AI Summary + TTS Feature
+### Milestone 3.4 — Twitter Bookmarks Import (Knowledge Base)
+
+**Duration:** 3-4 hours
+
+**Goal:** You can import your 100 saved Twitter bookmarks, search them with AI, and add personal learning notes — solving the "I saved it but can't find it" problem.
+
+**Prerequisites:** Milestone 3.3 complete
+
+**Implementation Steps:**
+1. Implement `twitter_service.py` in backend:
+   - Parse Twitter `bookmarks.json` export file
+   - Extract tweet text, author, URL, date
+   - Fetch full thread context for bookmarked tweets
+   - Handle Twitter data export format
+2. Add Twitter import endpoint in `routers/documents.py`:
+   - `POST /api/conversations/{id}/twitter`
+   - Accept `bookmarks.json` file upload
+   - Create documents for each tweet/thread
+3. Implement `TwitterImportButton.tsx` in frontend:
+   - File upload specific to Twitter bookmarks
+   - Show import progress (parsing 100 tweets)
+   - Display success message with count
+4. Add monthly reminder system:
+   - Dashboard shows "🔔 Update Twitter bookmarks?"
+   - Links to Twitter settings page
+   - Tracks last import date
+5. Implement merge logic:
+   - Compare tweet IDs to detect duplicates
+   - Keep existing bookmarks, add only new ones
+   - Update conversation title with import date
+
+**Acceptance Criteria:**
+- ✅ User can upload `bookmarks.json` from Twitter data export
+- ✅ Parser extracts ~100 bookmarks successfully
+- ✅ Full thread context included for multi-tweet threads
+- ✅ Creates "Twitter Bookmarks (YYYY-MM-DD)" conversation
+- ✅ User can ask: "What have I saved about React?"
+- ✅ AI finds relevant tweets and summarizes them
+- ✅ User can add notes: "📝 Learned: ..."
+- ✅ Re-importing merges new bookmarks (no duplicates)
+- ✅ Monthly reminder shown in dashboard
+
+**Files Created:**
+```
+Backend:
+backend/app/services/
+└── twitter_service.py
+
+Frontend:
+frontend/src/components/twitter/
+├── TwitterImportButton.tsx
+├── TwitterImportModal.tsx
+└── MonthlyReminderBanner.tsx
+```
+
+**Twitter `bookmarks.json` Format:**
+```json
+[
+  {
+    "tweet": {
+      "id_str": "1234567890",
+      "full_text": "This is the tweet content...",
+      "created_at": "Wed Mar 29 12:00:00 +0000 2024",
+      "user": {
+        "screen_name": "username",
+        "name": "Display Name"
+      },
+      "entities": {
+        "urls": [...],
+        "hashtags": [...]
+      }
+    }
+  }
+]
+```
+
+**Implementation Example:**
+```python
+# services/twitter_service.py
+def parse_twitter_bookmarks(file_path: str) -> list[Document]:
+    """
+    Parse Twitter bookmark export and extract threads.
+
+    Returns:
+        List of Document objects, one per tweet/thread
+    """
+    with open(file_path) as f:
+        data = json.load(f)
+
+    documents = []
+    for bookmark in data:
+        tweet = bookmark['tweet']
+
+        # Check if part of thread
+        if 'in_reply_to_status_id_str' in tweet:
+            # Fetch full thread context (recursive)
+            thread_tweets = fetch_thread(tweet)
+            text = format_thread(thread_tweets)
+        else:
+            text = format_single_tweet(tweet)
+
+        doc = Document(
+            conversation_id=conversation_id,
+            filename=f"tweet_{tweet['id_str']}",
+            file_type="twitter",
+            extracted_text=text
+        )
+        documents.append(doc)
+
+    return documents
+
+def format_single_tweet(tweet: dict) -> str:
+    """Format single tweet as readable text."""
+    return f"""
+Tweet by @{tweet['user']['screen_name']} ({tweet['user']['name']})
+Posted: {tweet['created_at']}
+
+{tweet['full_text']}
+
+Link: https://twitter.com/{tweet['user']['screen_name']}/status/{tweet['id_str']}
+Likes: {tweet.get('favorite_count', 0)} | Retweets: {tweet.get('retweet_count', 0)}
+""".strip()
+
+def fetch_thread(tweet: dict) -> list[dict]:
+    """Recursively fetch all tweets in a thread."""
+    # Note: For MVP, this extracts from export data only
+    # Future: Could fetch missing tweets via API
+    thread = [tweet]
+
+    # Walk up the thread (replies)
+    parent_id = tweet.get('in_reply_to_status_id_str')
+    if parent_id:
+        # Find parent in export data
+        parent = find_tweet_by_id(parent_id)
+        if parent:
+            thread = fetch_thread(parent) + thread
+
+    return thread
+```
+
+**Tests Required:**
+- `test_twitter_service.py`:
+  - `test_parse_single_tweet`
+  - `test_parse_thread` (multi-tweet thread)
+  - `test_handle_missing_fields` (incomplete data)
+  - `test_detect_duplicates` (merge logic)
+  - `test_format_tweet_text`
+- `TwitterImportButton.test.tsx`:
+  - Upload bookmarks.json triggers import
+  - Progress indicator shows during parse
+  - Success message displays count
+- Integration test:
+  - Upload bookmarks.json → creates conversation
+  - Ask "What have I saved about X?" → finds tweets
+  - Add note → saves in conversation
+
+**Definition of Done:**
+- [ ] Twitter bookmark parser handles full export format
+- [ ] Thread context extraction works
+- [ ] Import creates searchable conversation
+- [ ] User can ask questions about saved tweets
+- [ ] User can add learning notes as chat messages
+- [ ] Monthly reminder system implemented
+- [ ] Re-import merges (no duplicate tweets)
+- [ ] All tests pass (≥80% coverage)
+- [ ] Tested with real Twitter export file (100+ bookmarks)
+
+**User Flow:**
+```
+1. User: Visit twitter.com/settings → "Download your data"
+2. Wait: 24 hours for Twitter to prepare export
+3. User: Download bookmarks.json from email
+4. StudySync: Dashboard shows "🔔 Time to update Twitter bookmarks"
+5. User: Click "Import Twitter Bookmarks"
+6. User: Drag & drop bookmarks.json
+7. StudySync: Parses 100 bookmarks, extracts threads
+8. StudySync: Creates "Twitter Bookmarks (2024-03-29)" conversation
+9. User: Ask "What have I saved about Next.js?"
+10. AI: "You've saved 5 tweets about Next.js. Key themes: App Router..."
+11. User: Add note: "📝 Learned: Server components reduce JS bundle"
+12. Next month: Repeat steps 1-7 (merge new bookmarks)
+```
+
+---
+
+### Milestone 3.5 — AI Summary + TTS Feature
 
 **Duration:** 4-5 hours
 

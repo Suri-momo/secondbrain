@@ -196,9 +196,9 @@ External APIs:
 |--------|------|-------------|-------------|
 | `id` | UUID | PRIMARY KEY | Unique identifier |
 | `conversation_id` | UUID | FOREIGN KEY, NOT NULL | References conversations(id) ON DELETE CASCADE |
-| `filename` | String(255) | NOT NULL | Original filename |
-| `file_type` | Enum | NOT NULL | 'pdf', 'txt', 'audio', 'url' |
-| `extracted_text` | Text | NOT NULL | Parsed/transcribed text |
+| `filename` | String(255) | NOT NULL | Original filename (or tweet_id for Twitter) |
+| `file_type` | Enum | NOT NULL | 'pdf', 'txt', 'audio', 'url', 'twitter' |
+| `extracted_text` | Text | NOT NULL | Parsed/transcribed text (or formatted tweet) |
 | `created_at` | DateTime | NOT NULL, DEFAULT NOW | Upload timestamp |
 
 **Indexes:**
@@ -237,6 +237,7 @@ External APIs:
 | POST | `/api/conversations/{id}/chat` | Send message (streaming) | **SSE stream** |
 | POST | `/api/conversations/{id}/upload` | Upload file | JSON object (201) |
 | POST | `/api/conversations/{id}/url` | Ingest URL | JSON object (201) |
+| POST | `/api/conversations/{id}/twitter` | Import Twitter bookmarks | JSON object (201) |
 | POST | `/api/conversations/{id}/summary` | Generate summary | JSON object (201) |
 | POST | `/api/conversations/{id}/summary/audio` | Generate TTS audio | JSON object (201) |
 | GET | `/api/conversations/{id}/summary/audio/{audio_id}` | Download MP3 | Binary (MP3) |
