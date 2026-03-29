@@ -1,10 +1,10 @@
-# StudySync
+# SecondBrain
 
-A conversational AI study assistant that helps you learn from PDFs, audio recordings, and URLs.
+A conversational AI study assistant that helps you learn from PDFs, audio recordings, URLs, and Twitter bookmarks.
 
 ## Overview
 
-StudySync is a full-stack application that combines document ingestion, AI-powered Q&A, web search, and persistent conversation history into a single ChatGPT-like interface for studying.
+SecondBrain is a full-stack application that combines document ingestion, AI-powered Q&A, web search, and persistent conversation history into a single ChatGPT-like interface for studying and knowledge management.
 
 ## Tech Stack
 

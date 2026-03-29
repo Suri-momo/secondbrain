@@ -1,4 +1,4 @@
-# 🎨 StudySync — System Design Document
+# 🎨 SecondBrain — System Design Document
 
 > **Last Updated:** 2024-03-29
 > **Status:** 📝 Planning Phase
@@ -23,9 +23,9 @@
 
 ## 🎯 Overview
 
-### What is StudySync?
+### What is SecondBrain?
 
-StudySync is a **conversational AI study assistant** that helps students learn from multiple content sources (PDFs, audio, URLs) through natural dialogue with Claude AI.
+SecondBrain is a **conversational AI study assistant** that helps students learn from multiple content sources (PDFs, audio, URLs) through natural dialogue with Claude AI.
 
 ### Core Value Proposition
 
@@ -941,13 +941,13 @@ DATABASE_URL=postgresql://vercel:***@***
 ANTHROPIC_API_KEY=sk-ant-***
 OPENAI_API_KEY=sk-***
 TAVILY_API_KEY=tvly-***
-NEXT_PUBLIC_API_URL=https://studysync.vercel.app
+NEXT_PUBLIC_API_URL=https://secondbrain.vercel.app
 ```
 
 **Development:**
 ```bash
 # .env.local
-DATABASE_URL=sqlite:///./studysync.db
+DATABASE_URL=sqlite:///./secondbrain.db
 ANTHROPIC_API_KEY=sk-ant-test-***
 OPENAI_API_KEY=sk-test-***
 TAVILY_API_KEY=tvly-test-***

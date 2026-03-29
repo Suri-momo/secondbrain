@@ -1,4 +1,4 @@
-# StudySync — Product Requirements Document (PRD)
+# SecondBrain — Product Requirements Document (PRD)
 
 **Version:** 1.0
 **Date:** 2026-03-28
@@ -9,7 +9,7 @@
 ## 1. Overview
 
 ### 1.1 Product Summary
-StudySync is a personal AI study assistant that lets users upload learning materials (PDFs, text files, audio recordings) or paste a URL, then have a multi-turn conversation about the content. It combines Claude's reasoning, real-time web search, and persistent conversation history into a single ChatGPT-like interface.
+SecondBrain is a personal AI study assistant that lets users upload learning materials (PDFs, text files, audio recordings), paste URLs, or import Twitter bookmarks, then have a multi-turn conversation about the content. It combines Claude's reasoning, real-time web search, and persistent conversation history into a single ChatGPT-like interface.
 
 ### 1.2 Problem Statement
 Students and self-learners frequently switch between reading PDFs, listening to lectures, searching the web, and taking notes — all in separate tools. There is no single place to ingest all of these formats and have an intelligent conversation across them.
@@ -93,15 +93,15 @@ Users can import their saved Twitter bookmarks to create a searchable knowledge 
 **User Flow:**
 1. User requests Twitter data export (Settings → Download your data)
 2. After 24h, Twitter emails `bookmarks.json`
-3. User drags & drops file into StudySync
-4. StudySync parses ~100 bookmarks, extracts threads
+3. User drags & drops file into SecondBrain
+4. SecondBrain parses ~100 bookmarks, extracts threads
 5. Creates "Twitter Bookmarks" conversation
 6. User asks: "What have I saved about Next.js?"
 7. AI finds relevant tweets + summarizes
 8. User adds notes: "📝 Learned: App Router replaces pages..."
 9. Monthly reminder to re-import (new bookmarks merged)
 
-**Problem Solved:** Users save tweets but never have time to review them and can't find them when needed.
+**Problem Solved:** Users save tweets but never have time to review them and can't find them when needed. SecondBrain becomes your searchable external memory.
 
 ---
 

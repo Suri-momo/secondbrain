@@ -1,15 +1,15 @@
-# StudySync: Implementation Plan
+# SecondBrain: Implementation Plan
 
 ## Overview
 
-StudySync is a full-stack conversational study assistant that ingests documents, audio, and URLs, then lets users chat about that content using Claude as the reasoning engine, with optional Tavily-powered web search and persistent multi-turn history stored in SQLite.
+SecondBrain is a full-stack conversational study assistant that ingests documents, audio, and URLs, then lets users chat about that content using Claude as the reasoning engine, with optional Tavily-powered web search and persistent multi-turn history stored in SQLite.
 
 ---
 
 ## 1. Full Project Directory Structure
 
 ```
-studysync-suri/
+secondbrain/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml                          # GitHub Actions CI pipeline
@@ -1193,7 +1193,7 @@ This section breaks down each phase into specific milestones with clear acceptan
 
 **Files Created:**
 ```
-studysync-suri/
+secondbrain/
 ├── .gitignore
 ├── .husky/pre-commit
 ├── .husky/pre-push
@@ -1250,7 +1250,7 @@ studysync-suri/
 
 **Acceptance Criteria:**
 - ✅ `alembic upgrade head` creates all tables without errors
-- ✅ `studysync.db` file created in backend directory
+- ✅ `secondbrain.db` file created in backend directory
 - ✅ All four tables exist: `conversations`, `messages`, `documents`, `summaries`
 - ✅ Foreign key relationships work correctly
 - ✅ `get_db()` dependency provides working session
@@ -1891,11 +1891,11 @@ def fetch_thread(tweet: dict) -> list[dict]:
 1. User: Visit twitter.com/settings → "Download your data"
 2. Wait: 24 hours for Twitter to prepare export
 3. User: Download bookmarks.json from email
-4. StudySync: Dashboard shows "🔔 Time to update Twitter bookmarks"
+4. SecondBrain: Dashboard shows "🔔 Time to update Twitter bookmarks"
 5. User: Click "Import Twitter Bookmarks"
 6. User: Drag & drop bookmarks.json
-7. StudySync: Parses 100 bookmarks, extracts threads
-8. StudySync: Creates "Twitter Bookmarks (2024-03-29)" conversation
+7. SecondBrain: Parses 100 bookmarks, extracts threads
+8. SecondBrain: Creates "Twitter Bookmarks (2024-03-29)" conversation
 9. User: Ask "What have I saved about Next.js?"
 10. AI: "You've saved 5 tweets about Next.js. Key themes: App Router..."
 11. User: Add note: "📝 Learned: Server components reduce JS bundle"
@@ -2238,7 +2238,7 @@ Use this checklist to verify each milestone is truly complete before moving to t
 ANTHROPIC_API_KEY=sk-ant-...
 OPENAI_API_KEY=sk-...
 TAVILY_API_KEY=tvly-...
-DATABASE_URL=sqlite:///./studysync.db
+DATABASE_URL=sqlite:///./secondbrain.db
 UPLOAD_DIR=./uploads
 CORS_ORIGINS=http://localhost:3000
 MAX_FILE_SIZE_MB=50
@@ -2538,7 +2538,7 @@ git push --no-verify
 
 ### 9.1 Deployment Overview
 
-StudySync will be deployed to Vercel with:
+SecondBrain will be deployed to Vercel with:
 - **Frontend**: Next.js 14 app on Vercel Edge Network
 - **Backend**: FastAPI deployed as serverless function or separate service
 - **Database**: SQLite for MVP (upgrade to Vercel Postgres for production)
@@ -2618,7 +2618,7 @@ vercel --prod
 ### 9.5 Database Migration Strategy
 
 **MVP: SQLite**
-- Store `studysync.db` in `/tmp` on Vercel (ephemeral)
+- Store `secondbrain.db` in `/tmp` on Vercel (ephemeral)
 - Use Vercel KV or Vercel Blob for persistent storage
 
 **Production: Vercel Postgres**

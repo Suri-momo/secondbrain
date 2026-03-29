@@ -1,4 +1,4 @@
-# StudySync Development Log
+# SecondBrain Development Log
 
 A chronological record of completed milestones, features, and tasks.
 
