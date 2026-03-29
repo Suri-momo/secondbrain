@@ -65,6 +65,36 @@ A chronological record of completed milestones, features, and tasks.
 - Build core features first (Milestones 1-3)
 - Implement Twitter import in Phase 4
 
+### ✅ Milestone 1.1 Complete: Project Structure & Tooling
+**Time:** 2024-03-29 16:45 UTC
+
+**Completed:**
+- Full monorepo setup with Next.js 14 frontend and FastAPI backend
+- All production dependencies installed and tested
+- Git hooks configured with Husky + lint-staged
+- Pre-commit: runs Ruff (Python) and ESLint (TypeScript) on staged files
+- Pre-push: runs pytest (backend) and jest (frontend) test suites
+- Both servers verified to start without errors
+- Placeholder tests created and passing
+
+**Stack Verification:**
+- ✅ Backend: FastAPI 0.104.1, Python 3.11.11
+- ✅ Backend Tools: pytest 7.4.3, ruff 0.1.6, mypy 1.7.1
+- ✅ Frontend: Next.js 14.2.35, React 18, TypeScript 5
+- ✅ Frontend Tools: jest 30.3.0, @playwright/test 1.58.2
+- ✅ Git Hooks: Husky 9.1.7, lint-staged 16.4.0
+
+**Test Results:**
+- Backend: 1 unit test passing (test_example.py)
+- Frontend: 1 unit test passing (example.test.tsx)
+- Pre-commit hook: Successfully runs linters
+- Pre-push hook: Successfully runs all tests before push
+
+**Next Steps:**
+- Start Milestone 1.2: Database Foundation
+- Create SQLAlchemy models
+- Set up Alembic migrations
+
 ---
 
 ## Milestone Progress Tracker
@@ -72,19 +102,48 @@ A chronological record of completed milestones, features, and tasks.
 ### Phase 1 — Foundation
 
 #### Milestone 1.1 — Project Structure & Tooling Setup
-**Status:** 🚧 Not Started
+**Status:** ✅ Complete
 **Goal:** Both backend and frontend servers start without errors, and git hooks enforce code quality on every commit.
 
 **Tasks:**
-- [ ] Create backend directory with FastAPI stub
-- [ ] Create frontend directory with Next.js 14
-- [ ] Install Husky + lint-staged
-- [ ] Configure Ruff, ESLint, Prettier
-- [ ] Verify both servers start
-- [ ] Test git hooks
+- [x] Create backend directory with FastAPI stub
+- [x] Create frontend directory with Next.js 14
+- [x] Install Husky + lint-staged
+- [x] Configure Ruff, ESLint, Prettier
+- [x] Verify both servers start
+- [x] Test git hooks
 
-**Started:**
-**Completed:**
+**Started:** 2024-03-29 16:20 UTC
+**Completed:** 2024-03-29 16:45 UTC
+
+**Details:**
+- Created backend with FastAPI 0.104.1, Python 3.11+
+- Installed all backend dependencies: SQLAlchemy, Alembic, Anthropic, OpenAI, Tavily
+- Installed dev dependencies: pytest, pytest-cov, ruff, mypy
+- Created Next.js 14 frontend with TypeScript, Tailwind CSS, ESLint
+- Installed frontend dependencies: zustand, @tanstack/react-query, lucide-react, react-markdown
+- Installed testing frameworks: jest, @testing-library/react, @playwright/test
+- Configured Jest with 80% coverage threshold
+- Configured Playwright for E2E testing
+- Installed Husky + lint-staged at monorepo root
+- Pre-commit hook: runs lint-staged (Ruff for Python, ESLint for TypeScript)
+- Pre-push hook: runs pytest (backend) and jest (frontend)
+- Created placeholder tests: test_example.py (backend), example.test.tsx (frontend)
+- Verified FastAPI app imports successfully
+- All tests passing: 1 backend unit test, 1 frontend unit test
+
+**Git Commits:**
+- `f580b61` - Complete Milestone 1.1: Project structure and tooling setup
+- `5cc0549` - Add placeholder tests for backend and frontend
+
+**Challenges:**
+- pytest-cov not initially installed, causing pre-push hook to fail
+- Jest attempted to run Playwright e2e tests, fixed by adding testPathIgnorePatterns
+
+**Learnings:**
+- Pre-commit and pre-push hooks work seamlessly with lint-staged
+- Jest and Playwright need separate configurations to avoid conflicts
+- Backend and frontend tests can run in parallel via monorepo root scripts
 
 ---
 
