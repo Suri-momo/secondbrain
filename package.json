@@ -1,0 +1,39 @@
+{
+  "name": "studysync-suri",
+  "version": "1.0.0",
+  "description": "A conversational AI study assistant that helps you learn from PDFs, audio recordings, URLs, and Twitter bookmarks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test:frontend && npm run test:backend",
+    "test:frontend": "cd frontend && npm test",
+    "test:backend": "cd backend && pytest",
+    "lint": "npm run lint:frontend && npm run lint:backend",
+    "lint:frontend": "cd frontend && npm run lint",
+    "lint:backend": "cd backend && ruff check .",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "frontend/**/*.{js,jsx,ts,tsx}": [
+      "cd frontend && npm run lint --fix"
+    ],
+    "backend/**/*.py": [
+      "cd backend && ruff check --fix"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Suri-momo/secondbrain.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Suri-momo/secondbrain/issues"
+  },
+  "homepage": "https://github.com/Suri-momo/secondbrain#readme",
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0"
+  }
+}

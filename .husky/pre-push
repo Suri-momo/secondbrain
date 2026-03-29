@@ -1,0 +1,4 @@
+#!/bin/sh
+# Run tests before push
+npm run test:backend
+npm run test:frontend
