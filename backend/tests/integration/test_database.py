@@ -1,5 +1,4 @@
 """Integration tests for database CRUD operations."""
-import os
 import tempfile
 from pathlib import Path
 

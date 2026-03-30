@@ -3,6 +3,9 @@
 Key decisions, architectural choices, and lessons learned during development.
 
 ---
+## TODO: What does Vercel used for? When do I need Vercel?
+
+
 
 ## 📦 Deployment Strategy Decision
 

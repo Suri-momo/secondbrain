@@ -5,14 +5,10 @@ import pytest
 from pydantic import ValidationError
 
 from app.schemas import (
-    Conversation,
     ConversationCreate,
     ConversationUpdate,
-    Document,
     DocumentCreate,
-    Message,
     MessageCreate,
-    Summary,
     SummaryCreate,
 )
 

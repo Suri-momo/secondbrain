@@ -1,8 +1,5 @@
 """Unit tests for SQLAlchemy models."""
-from datetime import datetime
-from uuid import UUID
 
-import pytest
 
 from app.models import Conversation, Document, Message, Summary
 
