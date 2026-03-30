@@ -132,6 +132,54 @@ pytest  # 31 passed
 - Start Milestone 1.3: CI/CD Pipeline
 - Set up GitHub Actions workflow
 
+### 🤔 Deployment Strategy Decision (Deferred)
+**Time:** 2024-03-29 18:00 UTC
+
+**Context:**
+Discussed three deployment options for SecondBrain:
+
+**Option 1: Vercel-only (Serverless FastAPI)**
+- Simplest deployment (git push → auto-deploy)
+- ❌ 10-second timeout limit (problem for Claude streaming, PDF processing, audio transcription)
+- ❌ Poor fit for SecondBrain's AI workloads
+
+**Option 2: Vercel Frontend + Separate Backend (Docker)**
+- No timeout limits, full control over backend
+- ✅ Excellent fit for Claude streaming (30-60s responses)
+- ✅ Supports audio transcription (15-120s per file)
+- Requires Docker + Railway/Render setup (~3-4 hours)
+- Cost: $10-20/month vs $50-100/month Vercel-only
+
+**Option 3: Skip Docker, Decide Later**
+- Continue local development without deployment setup
+- Defer decision until features are built
+- **← CHOSEN APPROACH**
+
+**Decision:**
+- Proceeding with **Option 3** for now
+- Will decide between Option 1 vs 2 **before Milestone 2.3** (Claude Integration)
+- Timeline: ~2-3 weeks from now
+- Will test Claude streaming duration to inform decision
+
+**Decision Timeline:**
+- ✅ **Now - Week 2:** Build locally (Milestones 1.3-2.2) - no deployment needed
+- ⚠️ **Week 3 (Before Milestone 2.3):** DECIDE Option 1 or 2 based on Claude streaming test
+- 🔴 **Week 4-5 (Before Milestone 2.5):** MUST DECIDE - latest decision point
+
+**Documentation:**
+- Created TAKEAWAYS.md with full tradeoff analysis
+- See detailed comparison of all three options
+
+**Rationale:**
+- Focus on building features first
+- Avoid premature optimization
+- Test deployment strategy when we have features to deploy
+- Likely outcome: Will need Option 2 for SecondBrain's AI features
+
+**Next Steps:**
+- Continue with Milestone 1.3: CI/CD Pipeline (local testing only)
+- Revisit deployment decision in 2-3 weeks
+
 ---
 
 ## Milestone Progress Tracker
