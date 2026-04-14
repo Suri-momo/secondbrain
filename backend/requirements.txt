@@ -24,4 +24,4 @@ beautifulsoup4==4.12.2
 httpx==0.25.2
 
 # Utilities
-python-dotenv==1.0.0
+python-dotenv==1.2.2
